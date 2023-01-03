@@ -22,6 +22,11 @@ Connect ChatGTP to internet
  - Ask chatGPT (input + google results) server side
  - Get chatGPT answer (client side)
 
+
+ ## Notes
+
+ - There can be some API connections errors, if so reset the API key and update the .env file locally and the config var on Heroku
+
 License
 ----
 
