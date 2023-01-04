@@ -3,9 +3,10 @@ const path = require('path');
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const request = require('request');
 
+//configuration OPENAI GPT
 const { Configuration, OpenAIApi } = require("openai");
-
 const configuration = new Configuration({
     apiKey: process.env.OPENAI,
   });
@@ -21,6 +22,57 @@ app.post("/chat", async (req, res) => {
   // Get the prompt from the request
   const { prompt } = req.body;
 
+ // Get the 10 first results on Google related to this input (server side)
+ async function getGoogleResults(query) {
+    // Set up the options for the request
+    const options = {
+      url: 'https://www.googleapis.com/customsearch/v1',
+      qs: {
+        q: query,
+        key: process.env.GOOGLECUSTSEARCHENGINE,
+        cx: process.env.GOOGLESEARCHENGINEID,
+        num: 10
+      }
+    };
+    // Make the request and return a promise that resolves with the response
+  return new Promise((resolve, reject) => {
+    request.get(options, (error, response, body) => {
+      if (error) {
+        reject(error);
+      } else {
+        // Parse the response as JSON
+        const data = JSON.parse(body);
+        resolve(data);
+      }
+    });
+  });
+    }
+    // Get the Google results for the prompt
+  const googleResults = await getGoogleResults(prompt);
+
+    // Parse the google results
+    function displayGoogleResults(results) {
+        if (results && results.items) {
+          // Loop through the results and display them
+          for (let i = 0; i < results.items.length; i++) {
+            const item = results.items[i];
+            console.log(`${item.title} - ${item.link}`);
+            console.log(`${item.snippet}`);
+            console.log(`${item.displayLink}`);
+            console.log('');
+          }
+        } else {
+          console.log('No results found');
+        }
+      }
+
+  displayGoogleResults(googleResults);
+
+
+
+
+
+
 // Generate a response with ChatGPT
 const completion = await openai.createCompletion({
     model: "text-davinci-002",
@@ -28,7 +80,7 @@ const completion = await openai.createCompletion({
   });
   res.send(completion.data.choices[0].text);
 });
-
+//ici on va modifier le prompt pour inclure les resultats google
 
 
 app.get("/api", (req, res) => {
@@ -55,5 +107,4 @@ const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
-
   });
