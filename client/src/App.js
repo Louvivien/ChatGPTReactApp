@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import logo from "./logo.svg";
 import "./App.css";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 function App() {
-  const [data, setData] = React.useState(null);
   const [input, setPrompt] = useState("");
   const [response, setResponse] = useState("");
+  const [enrichedWithGoogleResults, setEnrichedWithGoogleResults] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Send a request to the server with the prompt
     axios
-      .post("/chat", { input })
+      .post("/chat", { input, enrichedWithGoogleResults })
       .then((res) => {
         // Update the response state with the server's response
         setResponse(res.data);
@@ -23,28 +23,50 @@ function App() {
       });
   };
     
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-        <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
-      <p>{response}</p>
-      </header>
+    <div className="container-fluid">
+  <div className="row">
+    <div className="col-12">
+      <h1>React app ChatGPT</h1>
+      <p>This React app is connected to ChatGPT</p>
     </div>
+  </div>
+  <div className="row mt-5">
+    <div className="col-12">
+    <Form className="form-inline" onSubmit={handleSubmit}>
+    <FormGroup switch>
+        <Input
+          type="switch"
+          checked={enrichedWithGoogleResults}
+          onChange={(e) => setEnrichedWithGoogleResults(e.target.checked)}
+              
+        />
+        <Label check>Enriched with Google results</Label>
+      </FormGroup>
+  <FormGroup>
+    <Label for="prompt">Enter your message:</Label>
+    <Input
+      type="text"
+      id="prompt"
+      value={input}
+      onChange={(e) => setPrompt(e.target.value)}
+    />
+  </FormGroup>
+  <Button color="primary">Submit</Button>
+</Form>
+<p className="mt-3 text-center">
+  {response ? (
+    <>
+      <img src="/images/logochatgpt.jpeg" alt="ChatGPT logo" />
+      {response}
+    </>
+  ) : null}
+</p>
+    </div>
+  </div>
+</div>
+
   );
 }
 
