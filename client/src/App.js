@@ -5,7 +5,7 @@ import "./App.css";
 
 function App() {
   const [data, setData] = React.useState(null);
-  const [prompt, setPrompt] = useState("");
+  const [input, setPrompt] = useState("");
   const [response, setResponse] = useState("");
 
   const handleSubmit = (e) => {
@@ -13,7 +13,7 @@ function App() {
 
     // Send a request to the server with the prompt
     axios
-      .post("/chat", { prompt })
+      .post("/chat", { input })
       .then((res) => {
         // Update the response state with the server's response
         setResponse(res.data);
@@ -37,7 +37,7 @@ function App() {
         <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={prompt}
+          value={input}
           onChange={(e) => setPrompt(e.target.value)}
         />
         <button type="submit">Submit</button>
