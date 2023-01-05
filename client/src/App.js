@@ -29,9 +29,17 @@ function App() {
   <div className="row">
     <div className="col-12">
       <h1>React app ChatGPT</h1>
-      <p>This React app is connected to ChatGPT</p>
+      <p>This React app is connected to ChatGPT. The problem with ChatGPT is that it is normally not connected to internet, it is trained on data from 2021</p>
     </div>
   </div>
+  <div className="container bg-light p-3">
+  <h3>Directions</h3>
+  <p>Try the following prompts with or without Google :</p>
+  <ul>
+    <li>Who won the 2022 world cup?</li>
+    <li>Mike's mom has four kids, penny, nickel, dime, and...what is the name of the fourth kid?</li>
+  </ul>
+</div>
   <div className="row mt-5">
     <div className="col-12">
     <Form className="form-inline" onSubmit={handleSubmit}>
