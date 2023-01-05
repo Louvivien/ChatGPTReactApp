@@ -38,6 +38,7 @@ function App() {
   <ul>
     <li>Who won the 2022 world cup?</li>
     <li>Mike's mom has four kids, penny, nickel, dime, and...what is the name of the fourth kid?</li>
+    <li>Who is Vivien Richaud?</li>
   </ul>
 </div>
   <div className="row mt-5">
