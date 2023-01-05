@@ -67,7 +67,8 @@ let prompt = `I want you to reply to all my questions in markdown format.\n`;
 
 let googleResultsString = '';
 if (googleResults && googleResults.items) {
-  googleResultsString = 'Given these web results:\n';
+  const currentDate = new Date();
+  googleResultsString = `As of ${currentDate}, given these web results:\n`;
   for (let i = 0; i < googleResults.items.length; i++) {
     const item = googleResults.items[i];
     googleResultsString += `- **Title:** ${item.title}\n`;
@@ -76,6 +77,7 @@ if (googleResults && googleResults.items) {
     googleResultsString += `  **Display link:** ${item.displayLink}\n`;
   }
 }
+
 
 prompt += `${googleResultsString}\n\nAnswer the following question:\nQ: ${input}?\nA: `;
 
