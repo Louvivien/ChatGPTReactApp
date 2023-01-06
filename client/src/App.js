@@ -63,16 +63,27 @@ function App() {
       onChange={(e) => setPrompt(e.target.value)}
     />
   </FormGroup>
+  <div className="d-flex align-items-center justify-content-center">
   <Button color="primary">Submit</Button>
+  </div>
+
 </Form>
-<p className="mt-3 text-center">
+<div >
   {response ? (
     <>
-      <img src="/images/logochatgpt.jpeg" alt="ChatGPT logo" />
-      {response}
+    <div style={{ marginTop: "20px" }}>
+      <div className="container-fluid">
+          <div className="row">
+            <div style={{ display: "flex", alignItems: "flex-start" }}>
+              <img src="/images/logochatgpt.jpeg" alt="ChatGPT logo" />
+              <div style={{ marginLeft: "10px", }}>{response}</div>
+            </div>
+          </div>
+      </div>
+      </div>
     </>
   ) : null}
-</p>
+</div>
     </div>
   </div>
 </div>
