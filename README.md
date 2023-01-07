@@ -14,12 +14,6 @@ I used the following ressources
 [ChatGTP React App](https://chatgptreact.herokuapp.com/) 
 
 
-### Todos
-
- - The response can be long so I will add a loading animation when waiting
-
-
-
 
 License
 ----
