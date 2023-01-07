@@ -27,15 +27,10 @@ app.post("/chat", async (req, res) => {
 
 //Enrich data with Google
 let googleResults;
-// Create a local cache object
-const cache = {};
+
 if (enrichedWithGoogleResults) {
   // Get the 10 first results on Google related to this input (server side)
   async function getGoogleResults(query) {
-     // Check the cache to see if the results are already available
-  if (cache[query]) {
-    return cache[query];
-  }
     // Set up the options for the request
     const options = {
       url: 'https://www.googleapis.com/customsearch/v1',
@@ -54,10 +49,6 @@ if (enrichedWithGoogleResults) {
       } else {
         // Parse the response as JSON
         const data = JSON.parse(body);
-
-        // Add the results to the cache
-        cache[query] = data;
-
         resolve(data);
       }
     });
