@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import ReactGA from 'react-ga';
+  const TRACKING_ID = "G-HBNG0CCQGL"; 
+  ReactGA.initialize(TRACKING_ID);
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
+  
 
 function App() {
   const [input, setPrompt] = useState("");
@@ -12,7 +18,11 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    // Track Submit in GA
+    ReactGA.event({
+      category: 'Submit',
+      action: 'Submited a question'
+    });  
     // Set isLoading to true before sending the request
       setIsLoading(true);
     // Send a request to the server with the prompt
@@ -30,7 +40,8 @@ function App() {
         console.error(err);
       });
   };
-    
+
+ 
 
   return (
   <Container fluid>
