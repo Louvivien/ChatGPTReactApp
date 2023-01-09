@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "node": "19.3.0"
-  },
+  "engines": { "node": "18.x" },
   "scripts": {
     "start": "node server/index.js",
     "build": "cd client && npm install && npm run build"

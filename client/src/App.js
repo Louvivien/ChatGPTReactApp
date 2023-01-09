@@ -21,7 +21,7 @@ function App() {
     // Track Submit in GA
     ReactGA.event({
       category: 'Submit',
-      action: 'Submited a question'
+      action: 'Submitted a question'
     });  
     // Set isLoading to true before sending the request
       setIsLoading(true);
