@@ -16,7 +16,8 @@ I used the following ressources
 
 ### Deploy
  -  [How to deploy on vercel](https://www.youtube.com/watch?v=YYmzj5DK_5s)
--  Add environnement variables for the servr :  OPENAI=yourAPIkey
+-  Add environnement variables for the server on vercel:  
+                                                OPENAI=yourAPIkey
                                                 GOOGLECUSTSEARCHENGINE=yourAPIkey
                                                 GOOGLESEARCHENGINEID=yourAPIkey
 
