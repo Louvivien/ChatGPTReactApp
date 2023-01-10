@@ -14,6 +14,7 @@ function App() {
   const [response, setResponse] = useState("");
   const [enrichedWithGoogleResults, setEnrichedWithGoogleResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
 
   const handleSubmit = (e) => {
@@ -27,7 +28,7 @@ function App() {
       setIsLoading(true);
     // Send a request to the server with the prompt
     axios
-      .post("/chat", { input, enrichedWithGoogleResults })
+      .post(`${API_ENDPOINT}/chat`, { input, enrichedWithGoogleResults })
       .then((res) => {
         // Update the response state with the server's response
         setResponse(res.data);
