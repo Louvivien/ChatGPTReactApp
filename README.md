@@ -11,7 +11,15 @@ I used the following ressources
 
 ### Live Demo
 
-[ChatGTP React App](https://chatgptreact.herokuapp.com/) 
+[ChatGTP React App](https://chat-gpt-react-app-omega.vercel.app/) 
+
+
+### Deploy
+ -  [How to deploy on vercel](https://www.youtube.com/watch?v=YYmzj5DK_5s)
+-  Add environnement variables for the servr :  OPENAI=yourAPIkey
+                                                GOOGLECUSTSEARCHENGINE=yourAPIkey
+                                                GOOGLESEARCHENGINEID=yourAPIkey
+
 
 
 
