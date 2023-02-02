@@ -1,10 +1,11 @@
-require('dotenv').config()
+const dotenv = require('dotenv').config()
 const path = require('path');
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const request = require('request');
 const moment = require("moment");
+const jsonFile = require("./data.json"); 
 
 //configuration OPENAI GPT
 const { Configuration, OpenAIApi } = require("openai");
@@ -144,12 +145,20 @@ try {
 });
 
 
+
+
   // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
   res.json({ message: "This React app is connected to ChatGPT" });
+});
+
+
+// Handle GET requests to other routes
+app.get("/demo/see-you-around-goodbye-card.json", (req, res) => {
+  res.json(jsonFile);
 });
 
 // All other GET requests not handled before will return our React app
